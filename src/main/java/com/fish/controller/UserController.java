@@ -21,6 +21,7 @@ public class UserController {
     @ResponseBody
     public User select(){
         System.out.println("laile");
+        System.out.println("hehe");
         return userService.selectAll(1);
     }
 }
