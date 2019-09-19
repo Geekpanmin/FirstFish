@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.mapper.PooldataMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.pojo.Pooldata" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pool_id" property="poolId" jdbcType="INTEGER" />
+    <result column="no_n" property="noN" jdbcType="REAL" />
+    <result column="nitrare_n" property="nitrareN" jdbcType="REAL" />
+    <result column="ph" property="ph" jdbcType="REAL" />
+    <result column="oxygen" property="oxygen" jdbcType="REAL" />
+    <result column="water_temperature" property="waterTemperature" jdbcType="REAL" />
+    <result column="weather_temperature" property="weatherTemperature" jdbcType="REAL" />
+    <result column="total_n" property="totalN" jdbcType="REAL" />
+    <result column="date_time" property="dateTime" jdbcType="DATE" />
+    <result column="time_slot" property="timeSlot" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pool_id, no_n, nitrare_n, ph, oxygen, water_temperature, weather_temperature, 
+    total_n, date_time, time_slot
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fish.pojo.PooldataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pooldata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pooldata
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pooldata
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fish.pojo.PooldataExample" >
+    delete from pooldata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fish.pojo.Pooldata" >
+    insert into pooldata (id, pool_id, no_n, 
+      nitrare_n, ph, oxygen, water_temperature, 
+      weather_temperature, total_n, date_time, 
+      time_slot)
+    values (#{id,jdbcType=INTEGER}, #{poolId,jdbcType=INTEGER}, #{noN,jdbcType=REAL}, 
+      #{nitrareN,jdbcType=REAL}, #{ph,jdbcType=REAL}, #{oxygen,jdbcType=REAL}, #{waterTemperature,jdbcType=REAL}, 
+      #{weatherTemperature,jdbcType=REAL}, #{totalN,jdbcType=REAL}, #{dateTime,jdbcType=DATE}, 
+      #{timeSlot,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.pojo.Pooldata" >
+    insert into pooldata
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="poolId != null" >
+        pool_id,
+      </if>
+      <if test="noN != null" >
+        no_n,
+      </if>
+      <if test="nitrareN != null" >
+        nitrare_n,
+      </if>
+      <if test="ph != null" >
+        ph,
+      </if>
+      <if test="oxygen != null" >
+        oxygen,
+      </if>
+      <if test="waterTemperature != null" >
+        water_temperature,
+      </if>
+      <if test="weatherTemperature != null" >
+        weather_temperature,
+      </if>
+      <if test="totalN != null" >
+        total_n,
+      </if>
+      <if test="dateTime != null" >
+        date_time,
+      </if>
+      <if test="timeSlot != null" >
+        time_slot,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="poolId != null" >
+        #{poolId,jdbcType=INTEGER},
+      </if>
+      <if test="noN != null" >
+        #{noN,jdbcType=REAL},
+      </if>
+      <if test="nitrareN != null" >
+        #{nitrareN,jdbcType=REAL},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=REAL},
+      </if>
+      <if test="oxygen != null" >
+        #{oxygen,jdbcType=REAL},
+      </if>
+      <if test="waterTemperature != null" >
+        #{waterTemperature,jdbcType=REAL},
+      </if>
+      <if test="weatherTemperature != null" >
+        #{weatherTemperature,jdbcType=REAL},
+      </if>
+      <if test="totalN != null" >
+        #{totalN,jdbcType=REAL},
+      </if>
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=DATE},
+      </if>
+      <if test="timeSlot != null" >
+        #{timeSlot,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fish.pojo.PooldataExample" resultType="java.lang.Integer" >
+    select count(*) from pooldata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pooldata
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.poolId != null" >
+        pool_id = #{record.poolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.noN != null" >
+        no_n = #{record.noN,jdbcType=REAL},
+      </if>
+      <if test="record.nitrareN != null" >
+        nitrare_n = #{record.nitrareN,jdbcType=REAL},
+      </if>
+      <if test="record.ph != null" >
+        ph = #{record.ph,jdbcType=REAL},
+      </if>
+      <if test="record.oxygen != null" >
+        oxygen = #{record.oxygen,jdbcType=REAL},
+      </if>
+      <if test="record.waterTemperature != null" >
+        water_temperature = #{record.waterTemperature,jdbcType=REAL},
+      </if>
+      <if test="record.weatherTemperature != null" >
+        weather_temperature = #{record.weatherTemperature,jdbcType=REAL},
+      </if>
+      <if test="record.totalN != null" >
+        total_n = #{record.totalN,jdbcType=REAL},
+      </if>
+      <if test="record.dateTime != null" >
+        date_time = #{record.dateTime,jdbcType=DATE},
+      </if>
+      <if test="record.timeSlot != null" >
+        time_slot = #{record.timeSlot,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pooldata
+    set id = #{record.id,jdbcType=INTEGER},
+      pool_id = #{record.poolId,jdbcType=INTEGER},
+      no_n = #{record.noN,jdbcType=REAL},
+      nitrare_n = #{record.nitrareN,jdbcType=REAL},
+      ph = #{record.ph,jdbcType=REAL},
+      oxygen = #{record.oxygen,jdbcType=REAL},
+      water_temperature = #{record.waterTemperature,jdbcType=REAL},
+      weather_temperature = #{record.weatherTemperature,jdbcType=REAL},
+      total_n = #{record.totalN,jdbcType=REAL},
+      date_time = #{record.dateTime,jdbcType=DATE},
+      time_slot = #{record.timeSlot,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.pojo.Pooldata" >
+    update pooldata
+    <set >
+      <if test="poolId != null" >
+        pool_id = #{poolId,jdbcType=INTEGER},
+      </if>
+      <if test="noN != null" >
+        no_n = #{noN,jdbcType=REAL},
+      </if>
+      <if test="nitrareN != null" >
+        nitrare_n = #{nitrareN,jdbcType=REAL},
+      </if>
+      <if test="ph != null" >
+        ph = #{ph,jdbcType=REAL},
+      </if>
+      <if test="oxygen != null" >
+        oxygen = #{oxygen,jdbcType=REAL},
+      </if>
+      <if test="waterTemperature != null" >
+        water_temperature = #{waterTemperature,jdbcType=REAL},
+      </if>
+      <if test="weatherTemperature != null" >
+        weather_temperature = #{weatherTemperature,jdbcType=REAL},
+      </if>
+      <if test="totalN != null" >
+        total_n = #{totalN,jdbcType=REAL},
+      </if>
+      <if test="dateTime != null" >
+        date_time = #{dateTime,jdbcType=DATE},
+      </if>
+      <if test="timeSlot != null" >
+        time_slot = #{timeSlot,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.pojo.Pooldata" >
+    update pooldata
+    set pool_id = #{poolId,jdbcType=INTEGER},
+      no_n = #{noN,jdbcType=REAL},
+      nitrare_n = #{nitrareN,jdbcType=REAL},
+      ph = #{ph,jdbcType=REAL},
+      oxygen = #{oxygen,jdbcType=REAL},
+      water_temperature = #{waterTemperature,jdbcType=REAL},
+      weather_temperature = #{weatherTemperature,jdbcType=REAL},
+      total_n = #{totalN,jdbcType=REAL},
+      date_time = #{dateTime,jdbcType=DATE},
+      time_slot = #{timeSlot,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
